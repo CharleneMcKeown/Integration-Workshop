@@ -50,9 +50,7 @@
 
 1. Click [here](https://github.com/paolosalvatori/ServiceBusExplorer/releases/download/4.1.112/ServiceBusExplorer-4.1.112.zip) to download Service Bus Explorer.  Extract the files and double click on ServiceBusExplorer.exe to run. 
 
-<img src="imgs/conn.PNG">
-
-2. Click **File** and choose **Enter connection string** from the dropdown.  Paste in your connection string on the box when it appears on the right hand side.
+2. Click **File** and choose **Enter connection string** from the dropdown.  Paste in your primary connection string that you saved earlier in the box when it appears on the right hand side.
 
 <img src="imgs/sbe1.PNG">
 
