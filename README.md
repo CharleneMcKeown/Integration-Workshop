@@ -18,7 +18,9 @@
 
 <img src="imgs/CreateSB.PNG">
 
-3. Enter a **unique name** for your service bus, select the **standard** pricing tier and create a new **resource group** - call it anything you like, and choose a **location**.
+3. Enter a **unique name** for your service bus, select the **Premium** pricing tier and create a new **resource group** - call it anything you like, and choose a **location**.
+
+CHANGE ME!
 
 <img src="imgs/CreateSB2.PNG">
 
@@ -105,6 +107,65 @@ We could use either, however - the first trigger uses a polling method under the
 
 5. You should now see a list of fields that we need to complete.  Choose your subscription, and for Resource Type, choose **Microsoft.ServiceBus.Namespaces**. Choose your service bus in the next field, and finally add an event type of **Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners**. 
 
+Click on **+ Add new parameter** and choose **Subscription Name** and call it **logicappsub**. 
+
 <img src="imgs/logicapp4.PNG">
 
-6. Click on **+ New Step**. 
+
+6. Click **+ New Step**.
+
+7. Search for **service bus** under **Choose an action**, and then choose **Get messages from a queue (peek-lock)**. 
+
+<img src="imgs/logicapp5.PNG">
+
+<img src="imgs/logicapp6.PNG">
+
+8. On the next screen, give the connection a name (this can be anything) and choose your service bus namespace.  You will need to choose an access policy - for this, simply choose **RootManageSharedAccessKey** and click **Create**.
+
+<img src="imgs/logicapp7.PNG">
+
+9. Select your service bus queue and leave everything else on default. 
+
+<img src="imgs/sb.PNG">
+
+10. We could multiple things at this point - there are over 200 built in connectors for Logic Apps, connecting to enterprise applications such as Dynamics, SAP, Office 365 and to consumer applications such as Dropbox, Gmail and Outlook. 
+
+In the next lab, we will look at Logic Apps in more depth, so for now - let's simply send an email to confirm that an order has been received.
+
+11. Click on **+ New Step** and choose whichever email provider you prefer.  In this example, I will use an Office 365 Outlook connector.
+
+12. Once you have authenticated, you can begin to build out the content of your email.
+
+You will notice that when you click on the fields, you have access to **dynamic data** based on previous actions. 
+
+<img src="imgs/logicapp8.PNG">
+
+If I click on **Body** and choose **Content** as the dynamic data, the Logic App is smart enough to switch to a foreach loop. 
+
+Now, for every service bus message processed, it will send an email with the content of that specific message. 
+
+<img src="imgs/logicapp9.PNG">
+
+13. Finally, once the Logic App has processed the message, we need to tell service bus to go ahead and complete the message - it has been dealt with. Happily, there is an action for that! Click on **Add an action** directly below the **Send an email** step, and choose **Service Bus** 
+
+14. Look for **Complete the message in a queue** and complete it so it looks like the below image.  When you click on the **Lock token** and **Session id** fields, you should be able to choose from the dynamic data pop out as shown above. 
+
+<img src="imgs/logicapp10.PNG">
+
+15. Finally, save and run your workflow!
+
+
+
+
+
+
+
+
+event grid exploration... 
+
+
+In the search bar at the top, search for **Event Grid Subscriptions** and click on it. Filter on **Topic Type - Service Bus Namespaces** and your subscription and location. You should see an **Event Grid Subscription** matching the name you chose in the Logic App step. Click on it. 
+
+You will see some metrics and 
+
+<img src="imgs/eventgridsub.PNG">
