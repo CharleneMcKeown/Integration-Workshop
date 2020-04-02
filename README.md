@@ -1,6 +1,8 @@
 # Integration Workshop (Incomplete!)
 
->Note: Todo: Blurb about integration services
+>Note: Todo: Blurb about integration services -- and describe the below pic and how this lab will build it:
+
+<img src="imgs/architecture.png">
 
 ## Lab 1: Service Bus and Event Grid
 
@@ -65,3 +67,44 @@ We just want to peek at the messages for now, so leave the defaults here and cli
 <img src="imgs/sbe4.PNG">
 
 You will see a list of orders, with JSON formatted content.  Each message has a **MessageId**, a **Sequence order** and **Size**, amongst other attributes.
+
+>Note: should prob add some additional tasks to send and receive test msgs directly from SBE. 
+
+### Event Grid integration
+
+So now we have messages flowing from an Azure Function into your Service Bus queue. What we need to do now is have some other service pick up those messages as and when they arrive.
+
+>Note: Polling vs Pushing - description
+
+1. Navigate back to the Azure portal, and click on **Create Resource** just like earlier. Search for **Logic App** and select **Logic App**. 
+
+2. Select your subscription and your resource group and give your Logic App a name, something like **order-process**. Select the same region you used before, and optionally, enable **Log Analytics**. Click **Create**.
+
+<img src="imgs/logicapp.PNG">
+
+After a few moments, your Logic App should be created. 
+
+3. Navigate to your new Logic App, and you should automatically see the Designer screen. If not, click **Designer** on the left hand pane. We want the Logic App to process an order as and when they come in, using a push strategy.  
+
+You will notice this screen:
+
+<img src="imgs/logicapp2.PNG">
+
+There are two triggers of interest:
+
+**- When a message is recieved in a Service Bus Queue** and
+**- When an Event Grid resource event occurs**
+
+We could use either, however - the first trigger uses a polling method under the covers, and we already know that a push method is more efficient. By reacting to a resource event using the Event Grid trigger, we can do this.
+
+4. Choose the **Event Grid resource event** trigger and follow the instructions on the next screen to sign into your Azure tenant (click the + icon). Once you have done that, select **Continue**.
+
+
+<img src="imgs/logicapp3.PNG">
+
+
+5. You should now see a list of fields that we need to complete.  Choose your subscription, and for Resource Type, choose **Microsoft.ServiceBus.Namespaces**. Choose your service bus in the next field, and finally add an event type of **Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners**. 
+
+<img src="imgs/logicapp4.PNG">
+
+6. Click on **+ New Step**. 
