@@ -2,7 +2,7 @@
 
 >Note: Todo: Blurb about integration services
 
-##Lab 1: Service Bus and Event Grid
+## Lab 1: Service Bus and Event Grid
 
 >Note: Blurb about service bus and event grid!
 
