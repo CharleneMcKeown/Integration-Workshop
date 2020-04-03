@@ -36,7 +36,7 @@ arrived—commonly known as polling—can be wasteful. Why not let a receiver be
 
 3. Enter a **unique name** for your service bus, select the **Premium** pricing tier and create a new **resource group** - call it anything you like, and choose a **location**.
 
-<img src="imgs/CreateSB2.PNG">
+<img src="imgs/CreateSB1.PNG">
 
 4. Click the create button. Wait a few minutes for it to create, then go to it. If you're not sure, type **Service Bus** in the search bar at the top of the Azure portal, and you should see it there.
 
