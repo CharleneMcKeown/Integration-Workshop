@@ -1,12 +1,28 @@
 # Integration Workshop (Incomplete!)
 
->Note: Todo: Blurb about integration services -- and describe the below pic and how this lab will build it:
+The goal of this lab and subsequent labs, is to get you familiar with Azure Integration Services. 
+
+No application is an island - more and more, we are seeing organisations face challenges in connecting their applications, particularly when the integration requires connecting to multiple, independent systems, often in complex ways.
+
+Azure Integration Services is an iPaaS (integration Platform as a Service)solution that can help organisations connect applications, wherever they are. It is comprised of four core services, however they can be used independently of one another, or together as a rich integration platform. These are:
+
+1. Service Bus
+1. Logic Apps
+1. Event Grid
+1. API Management
+
+Observe the picture below:
 
 <img src="imgs/architecture.png">
 
+During this lab and subsequent labs, you will start to build out this picture, starting with Service Bus and Event Grid.  The goal is to have something producing messages, which are sent to Service Bus. Event Grid will trigger a Logic App that will process the messages, as and when they are sent.  API Management will be used to protect our Logic App and our application that is sending messages. 
+
 ## Lab 1: Service Bus and Event Grid
 
->Note: Blurb about service bus and event grid!
+The essence of application integration is software talking to other software. But how should this communication happen? Sometimes, a direct call via API Management is perfect. In other cases, though, this synchronous style of communication won’t work. What if both applications aren’t available at the same time, for instance? For situations like this an asynchronous approach is required. This kind of communication is exactly what **Service Bus** provides.
+
+There are lots of integration scenarios in which communication through messages rather than API calls is the best approach. But requiring receiving software to periodically check whether a new message has
+arrived—commonly known as polling—can be wasteful. Why not let a receiver be notified via an event instead? This is exactly what **Event Grid** allows. Rather than requiring a receiver to poll for new messages, the receiver instead registers an event handler for the event source it’s interested in. Event Grid then invokes that event handler when the specified event occurs.
 
 ### Create resources
 
@@ -154,7 +170,9 @@ Now, for every service bus message processed, it will send an email with the con
 
 15. Finally, save and run your workflow!
 
+You should a successful run, and soon some emails appearing in your inbox. 
 
+<img src="imgs/logicapp11.PNG">
 
 
 
