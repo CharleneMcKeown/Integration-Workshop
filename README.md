@@ -36,8 +36,6 @@ arrived—commonly known as polling—can be wasteful. Why not let a receiver be
 
 3. Enter a **unique name** for your service bus, select the **Premium** pricing tier and create a new **resource group** - call it anything you like, and choose a **location**.
 
-CHANGE ME!
-
 <img src="imgs/CreateSB2.PNG">
 
 4. Click the create button. Wait a few minutes for it to create, then go to it. If you're not sure, type **Service Bus** in the search bar at the top of the Azure portal, and you should see it there.
@@ -175,12 +173,7 @@ You should a successful run, and soon some emails appearing in your inbox.
 <img src="imgs/logicapp11.PNG">
 
 
-
-
-
-
-event grid exploration... 
-
+### Monitoring and Alerting? 
 
 In the search bar at the top, search for **Event Grid Subscriptions** and click on it. Filter on **Topic Type - Service Bus Namespaces** and your subscription and location. You should see an **Event Grid Subscription** matching the name you chose in the Logic App step. Click on it. 
 
