@@ -172,11 +172,22 @@ You should a successful run, and soon some emails appearing in your inbox.
 
 <img src="imgs/logicapp11.PNG">
 
+You can go and look at the Event Grid subscription that was set up for us behind the scenes.
 
-### Monitoring and Alerting? 
-
-In the search bar at the top, search for **Event Grid Subscriptions** and click on it. Filter on **Topic Type - Service Bus Namespaces** and your subscription and location. You should see an **Event Grid Subscription** matching the name you chose in the Logic App step. Click on it. 
-
-You will see some metrics and 
+16. In the search bar at the top, search for **Event Grid Subscriptions** and click on it. Filter on **Topic Type - Service Bus Namespaces** and your subscription and location. You should see an **Event Grid Subscription** matching the name you chose in the Logic App step. Click on it and explore some of the tabs; you can see metrics, filter options, features like retry policies, dead-lettering and batching as well as the webhook endpoint for your Logic App, which was configured when the Logic App Event Grid connector was created as part of your workflow. 
 
 <img src="imgs/eventgridsub.PNG">
+
+### Event Grid
+
+Let's explore event grid a bit more. 
+
+**disable logic app first** 
+
+1. Create a storage account
+2. Create a container..
+3. Create a new event grid subscription with service bus as the handler
+4. filter for .pdfs
+5. storage explorer / browser
+6. upload ten files (provided in github)
+7. observe messages in service bus matching the filter
