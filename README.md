@@ -60,11 +60,13 @@ arrived—commonly known as polling—can be wasteful. Why not let a receiver be
 
 >Note: What is a Function.. what is this function going to do etc.. 
 
-10. tbd.. need to include Function code, and instructions on creating the output binding to service bus. 
+10. tbd.. need to include Function code, and instructions on creating the output binding to service bus... unless we pre-deploy it (preferred).
 
 ### Examine messages with Service Bus Explorer
 
->Note: what is service bus explorer.. including link to GitHub repo. 
+>Note: Service Bus Explorer allows users to connect to a Service Bus namespace and efficiently administer messaging entities. The tool provides advanced features like import/export functionality or the ability to test topic, queues, subscriptions, relay services, notification hubs and events hubs. 
+
+>Note: If you are following this lab as part of a hosted Microsoft workshop, then you should find Service Bus Explorer already installed on your VM - please run it from the desktop shortcut and skip to step 2.
 
 1. Click [here](https://github.com/paolosalvatori/ServiceBusExplorer/releases/download/4.1.112/ServiceBusExplorer-4.1.112.zip) to download Service Bus Explorer.  Extract the files and double click on ServiceBusExplorer.exe to run. 
 
@@ -90,7 +92,6 @@ You will see a list of orders, with JSON formatted content.  Each message has a 
 
 So now we have messages flowing from an Azure Function into your Service Bus queue. What we need to do now is have some other service pick up those messages as and when they arrive.
 
->Note: Polling vs Pushing - description
 
 1. Navigate back to the Azure portal, and click on **Create Resource** just like earlier. Search for **Logic App** and select **Logic App**. 
 
