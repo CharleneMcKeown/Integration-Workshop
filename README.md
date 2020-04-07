@@ -252,3 +252,12 @@ Explore the schema and data payload:
 ```
 
 The information within the nested **data** object is specific to our event source, in this case blob storage. Everything outside of that object is what we refer to as common event information. 
+
+
+##Wrap up & Clean up
+
+Hopefully this lab has helped to get you more familiar with event grid and service bus and how they can be used independently but also together to enable event driven architecture and reliable messaging. 
+
+In subsequent labs, we will work with Logic Apps in more depth, as well as introducing API Management.
+
+Don't forget to delete your resources afterwards - if you were following along as part of a hosted workshop, we will delete your resource group and resources following lab completion. 
