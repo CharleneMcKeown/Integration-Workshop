@@ -183,12 +183,72 @@ You can go and look at the Event Grid subscription that was set up for us behind
 
 Let's explore event grid a bit more. 
 
-**disable logic app first** 
+First of all, go back to the Logic App and disable it:
 
-1. Create a storage account
-2. Create a container..
-3. Create a new event grid subscription with service bus as the handler
-4. filter for .pdfs
-5. storage explorer / browser
-6. upload ten files (provided in github)
-7. observe messages in service bus matching the filter
+<img src="imgs/eg.PNG">
+
+1. Create a storage account - you can search for **Storage account** in the top search bar, select it and then click on + Add to create a new one. Give it a unique name, and use the settings from the image below as reference. Click **Review + create** then **create**. 
+
+<img src="imgs/eg2.PNG">
+
+2. After a few moments, it will have created. Go to your new storage account, and create a new container by selecting **Containers** on the left hand pane, and then **+ Container**. Call it **files** and leave it on **private access** and hit **Create**.
+
+<img src="imgs/eg3.PNG">
+
+3. Click **Events** on the left hand side and then **+ Event Subscription**. 
+
+<img src="imgs/eg4.PNG">
+
+4. Give the subscription a name, and then choose Service Bus Queue as the endpoint, selecting **orders** as the specific queue. Don't hit create yet.
+
+<img src="imgs/eg5.PNG">
+
+Click on the **Filters** next, then select **Enable subject filtering**. In the **subject ends with** field, type **.pdf**. Click **Create**.
+
+<img src="imgs/eg6.PNG">
+
+
+5. Click on **Storage Explorer (preview)** on the left hand side, then navigate to your container. 
+
+<img src="imgs/eg7.PNG">
+
+
+6. Click **Upload** and when prompted, select the folder on your VM desktop called **files**. Select all files within it, and hit open.  You should now be able to click the **upload** button to upload the files to your container. 
+
+<img src="imgs/eg8.PNG">
+
+7. Go back to Service Bus Explorer and refresh the service bus queue **orders**.  You should now see some new messages on there.  Click on **Messages** and retrieve **Top 10**. 
+
+You should see two new messages which match our filter for files ending in .pdf. Event grid ignored everything else we uploaded, and only created two events - one for each PDF file we uploaded. 
+
+Explore the schema and data payload:
+
+<img src="imgs/eg9.PNG">
+
+```
+{
+  "topic": "/subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/integration-workshop/providers/Microsoft.Storage/storageAccounts/integrationwotkshopstore",
+  "subject": "/blobServices/default/containers/files/blobs/inclusive_toolkit_manual_final.pdf",
+  "eventType": "Microsoft.Storage.BlobCreated",
+  "eventTime": "2020-04-07T07:28:58.2702865Z",
+  "id": "b337fb4a-f01e-0070-58ae-0c273706f7fe",
+  "data": {
+    "api": "PutBlockList",
+    "clientRequestId": "beaeac2e-365e-4e92-ab4f-98cc21aba038",
+    "requestId": "b337fb4a-f01e-0070-58ae-0c2737000000",
+    "eTag": "0x8D7DAC556036FF4",
+    "contentType": "application/pdf",
+    "contentLength": 21990001,
+    "blobType": "BlockBlob",
+    "url": "https://integrationwotkshopstore.blob.core.windows.net/files/inclusive_toolkit_manual_final.pdf",
+    "sequencer": "000000000000000000000000000000C900000000005ca013",
+    "storageDiagnostics": {
+      "batchId": "5542ea5d-0006-0003-00ae-0c57f4000000"
+    }
+  },
+  "dataVersion": "",
+  "metadataVersion": "1"
+}
+```
+
+The information within the nested **data** object is specific to our event source, in this case blob storage. Everything outside of that object is what we refer to as common event information. 
