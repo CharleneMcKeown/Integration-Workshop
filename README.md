@@ -223,7 +223,7 @@ You should see two new messages which match our filter for files ending in .pdf.
 
 Explore the schema and data payload:
 
-<img src="imgs/eg9.PNG">
+<img src="imgs/eg10.PNG">
 
 ```
 {
