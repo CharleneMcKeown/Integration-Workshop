@@ -52,15 +52,118 @@ arrived—commonly known as polling—can be wasteful. Why not let a receiver be
 
 **Let's start sending messages to it!**
 
-8. We will need a connection string to be able to send messages to the service bus queue, so click on **Shared Access Policies**, then **RootManageSharedAccessKey**.  Copy the **Primary Connection String** and paste it into notepad, as we will need it throughout this lab.
+8. We will need a connection string to be able to send messages to the service bus queue. Return to the overview of your Service Bus Namespace (not the queue you just created) and then click on **Shared Access Policies**, then **RootManageSharedAccessKey**.  Copy both the **Primary Key** and the **Primary Connection String** values and store them somewhere handy, such as in notepad, as we will need them throughout this lab.
 
 <img src="imgs/conn.PNG">
 
 9. Let's deploy an Azure Function. 
 
->Note: What is a Function.. what is this function going to do etc.. 
+    We're going to use an Azure Function, which is a serverless application, to push messages into our Service Bus queue.
 
-10. tbd.. need to include Function code, and instructions on creating the output binding to service bus... unless we pre-deploy it (preferred).
+    Return to the Azure Portal's main dashboard and choose **Create a resource** again
+
+<img src="imgs/Create.PNG">
+
+This time, search for **Function App**, select it, and then hit the **Create** button:
+
+<img src="imgs/CreateFunctionApp.png">
+
+On the **Basics** page, you can either select the same **Resource Group** where you deployed your Service Bus, or you can create a new resource group.
+
+Choose a name for your Function App, then ensure the settings match those below. In particular, we're going to use **Node.js** for our Function Apps code.
+
+<img src="imgs/CreateFunctionAppBasics.png">
+
+Click the **Review + Create** button, then click the **Create** button at the bottom of that page. The deployment of the Function App will commence and should complete in about a minute.
+
+<img src="imgs/CreateFunctionAppCreate.png">
+
+Click the **Go to resource** button
+
+<img src="imgs/CreateFunctionComplete.png">
+
+10. Now we will create a Function. Click the **+ New Function** button.
+
+<img src="imgs/CreateFunction.png">
+
+Select the **In-Portal** option and then click **Continue**
+
+<img src="imgs/CreateFunctionInPortal.png">
+
+We want a function that will run on a schedule, so choose the **Timer** option and then click **Create**
+
+<img src="imgs/CreateFunctionTimer.png">
+
+A function application allows us to define a Trigger that is used to initiate the function, as well as inputs and outputs. In this case, we want to modify the trigger to determine how often the function will run and we want to modify the output to send messages to Service Bus.
+
+Click the **Integrate** link on the left hand side
+
+<img src="imgs/FunctionIntegrate.png">
+
+Now, we will change the schedule so that the function runs every 30 seconds. Paste the following value into the **Schedule** box
+
+```*/30 * * * * *```
+
+It should look like the following
+
+<img src="imgs/FunctionTimerTrigger.png">
+
+If you're familiar with the ```cron``` scheduler in Linux, this is using the same format to specify how often the function will run.
+
+Click the **Save** button to save the new schedule.
+
+Next, we will create a new output so that we can send messages to service bus.  Click the **+ New Output** button.
+
+<img src="imgs/FunctionNewOutput.png">
+
+Now select **Azure Service Bus** and then click **Select**
+
+<img src="imgs/FunctionNewOutputSB.png">
+
+Change the **Message Type** to **Service Bus Queue**
+
+To the right of **Service Bus Connection**, you should see a **new** link. Click that link
+
+<img src="imgs/FunctionNewOutputSBnew.png">
+
+You should now see a list of available Service Bus namespaces. Choose the one you created earlier and then click **Select**
+
+<img src="imgs/FunctionNewOutputSBnewNS.png">
+
+Finally, change the **Queue name** to **orders** and click the **Save** button.
+
+<img src="imgs/FunctionNewOutputSBqueue.png">
+
+Now we need to provide the code for the function to run. Click on the **TimerTrigger1** link.
+
+<img src="imgs/FunctionTimerTrigger1.png">
+
+You will see a code window on the right hand side. Replace **all** of the code with the following:
+
+``` javascript
+module.exports = async function (context, myTimer) {
+    var timeStamp = new Date().toISOString();
+    
+    var message = {
+        message: 'Service Bus queue message created',
+        timeStamp: timeStamp
+    };
+
+    context.log('JavaScript timer trigger function ran at', timeStamp);   
+    context.bindings.outputSbMsg = [];
+    context.bindings.outputSbMsg.push(message);
+    context.done();
+};
+```
+This is a very simple function that is just going to write some JSON formatted data to a service bus message.
+
+Click the **Save and run** button at the top of the page. After a few moments, you should see some messages in the Logs section indicating that the function is running successfully
+
+```
+2020-04-07T21:20:00.021 [Information] Executing 'Functions.TimerTrigger1' (Reason='Timer fired at 2020-04-07T21:20:00.0206139+00:00', Id=b3233bf3-82cd-4bb8-b326-873b529ea61f)
+2020-04-07T21:20:00.025 [Information] JavaScript timer trigger function ran at 2020-04-07T21:20:00.018Z
+2020-04-07T21:20:00.150 [Information] Executed 'Functions.TimerTrigger1' (Succeeded, Id=b3233bf3-82cd-4bb8-b326-873b529ea61f)
+```
 
 ### Examine messages with Service Bus Explorer
 
