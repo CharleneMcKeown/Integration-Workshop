@@ -355,7 +355,7 @@ Explore the schema and data payload:
 The information within the nested **data** object is specific to our event source, in this case blob storage. Everything outside of that object is what we refer to as common event information. 
 
 
-##Wrap up & Clean up
+## Wrap up & Clean up
 
 Hopefully this lab has helped to get you more familiar with event grid and service bus and how they can be used independently but also together to enable event driven architecture and reliable messaging. 
 
