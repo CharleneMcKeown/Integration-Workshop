@@ -15,7 +15,7 @@ Observe the picture below:
 
 <img src="imgs/architecture.png">
 
-During this lab and subsequent labs, you will start to build out this picture, starting with Service Bus and Event Grid.  The goal is to have something producing messages, which are sent to Service Bus. Event Grid will trigger a Logic App that will process the messages, as and when they are sent.  API Management will be used to protect our Logic App and our application that is sending messages. 
+During this lab, you will start to build out something that resembles this picture, starting with Service Bus and Event Grid.  The goal is to have something producing messages (in this case, a Function App), which are sent to Service Bus. Event Grid will trigger a Logic App that will process the messages, as and when they are sent.  In a follow up lab, API Management will be used to protect our Logic App and our Function App that is sending messages. 
 
 ## Lab 1: Service Bus and Event Grid
 
@@ -177,7 +177,7 @@ Click the **Save and run** button at the top of the page. After a few moments, y
 
 <img src="imgs/sbe1.PNG">
 
-3. You will see your service bus and its properties - in this case, we can see a service namespace and a queue called **orders**. You should see some orders in the queue. Click on **Messages** to examine some of these.
+3. You will see your service bus and its properties - in this case, we can see a service namespace and a queue called **orders**. You should see some messages in the queue. Click on **Messages** to examine some of these.
 
 <img src="imgs/sbe2.PNG">
 
@@ -187,9 +187,7 @@ We just want to peek at the messages for now, so leave the defaults here and cli
 
 <img src="imgs/sbe4.PNG">
 
-You will see a list of orders, with JSON formatted content.  Each message has a **MessageId**, a **Sequence order** and **Size**, amongst other attributes.
-
->Note: should prob add some additional tasks to send and receive test msgs directly from SBE. 
+You will see a list of messages.  Each message has a **MessageId**, a **Sequence order** and **Size**, amongst other attributes.
 
 ### Event Grid integration
 
