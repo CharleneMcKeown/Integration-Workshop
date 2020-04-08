@@ -145,8 +145,11 @@ module.exports = async function (context, myTimer) {
     var timeStamp = new Date().toISOString();
     
     var message = {
-        message: 'Service Bus queue message created',
-        timeStamp: timeStamp
+        product: 'Isle of Cats',
+        price: '£35.00',
+        genre: 'polyomino',
+        weight: '5.5kg',
+        orderDate: timeStamp
     };
 
     context.log('JavaScript timer trigger function ran at', timeStamp);   
