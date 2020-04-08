@@ -1,4 +1,4 @@
-# Integration Workshop (Incomplete!)
+# Integration Workshop
 
 The goal of this lab and subsequent labs, is to get you familiar with Azure Integration Services. 
 
