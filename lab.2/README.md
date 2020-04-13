@@ -79,7 +79,9 @@ Positive tweets should also be detected and stored for later processing.
 
 Azure Cognitive Services:
 https://docs.microsoft.com/en-us/azure/cognitive-services/
+
 https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
+
 https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
 
 Create a Cognitive Services account:
