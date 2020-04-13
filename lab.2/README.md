@@ -2,9 +2,11 @@
 
 Now that you are more familiar with Logic Apps, here are some challenges to try out.  These challenges are designed to be unguided, and importantly, there is no absolute *right* solution.
 
-Naturally, some of the built in Logic App connectors will be more suitable than others, but the goal here is to learn more about Logic Apps,not to get to a *right* solution. 
+Naturally, some of the built in Logic App connectors will be more suitable than others, but the goal here is to learn more about Logic Apps, not to get to a *right* solution. 
 
 At the end of this document you will find some links that may be useful. You should expect to have to do some searching of documentation to achieve this challenge if you are fairly new to Logic Apps.
+
+You do not need to write any custom code to complete the challenges - everything is achievable using pre-built connectors and some supporting Azure services - which you should be familiar with now.
 
 
 ## Challenge 1
