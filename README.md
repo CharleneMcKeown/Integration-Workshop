@@ -19,6 +19,10 @@ During these labs, you will start to build out something that resembles this pic
 
 API Management will be introduced to expose an API and protect it using policy. 
 
+[Lab 1 - Service Bus & Event Grid](https://github.com/CharleneMcKeown/Integration-Workshop/blob/master/README.md) |
+[Lab 2 - Logic App Challenges](https://github.com/CharleneMcKeown/Integration-Workshop/tree/master/lab.2) |
+Lab 3 - API Management - coming soon!
+
 ## Lab 1: Service Bus and Event Grid
 
 The essence of application integration is software talking to other software. But how should this communication happen? Sometimes, a direct call via API Management is perfect. In other cases, though, this synchronous style of communication won’t work. What if both applications aren’t available at the same time, for instance? For situations like this an asynchronous approach is required. This kind of communication is exactly what **Service Bus** provides.
