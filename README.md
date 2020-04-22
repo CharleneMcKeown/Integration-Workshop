@@ -15,7 +15,9 @@ Observe the picture below:
 
 <img src="imgs/architecture.png">
 
-During this lab, you will start to build out something that resembles this picture, starting with Service Bus and Event Grid.  The goal is to have something producing messages (in this case, a Function App), which are sent to Service Bus. Event Grid will trigger a Logic App that will process the messages, as and when they are sent.  In a follow up lab, API Management will be used to protect our Logic App and our Function App that is sending messages. 
+During these labs, you will start to build out something that resembles this picture, starting with Service Bus and Event Grid.  The goal is to have something producing messages (in this case, a Function App), which are sent to Service Bus. Event Grid will trigger a Logic App that will process the messages, as and when they are sent.  
+
+API Management will be introduced to expose an API and protect it using policy. 
 
 ## Lab 1: Service Bus and Event Grid
 
