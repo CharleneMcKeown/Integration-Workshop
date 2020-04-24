@@ -1,14 +1,18 @@
 # API Management Hands on Lab
 
+## What is API Management?
 The Azure API management (APIM) service is hosted in the Azure cloud and is positioned between your APIs and the Internet. An Azure API gateway is an instance of the Azure API management service.
 
 When you publish your APIs, you use the Azure portal to control how particular APIs are exposed to consumers. You might want some APIs to be freely available to developers, for demo purposes, and access to other APIs to be tightly controlled.
 
 Suppose you are the lead developer for an online shoe company. The company is growing quickly and wants to optimize its supply chain. One component of this optimization is to expose some internal data and processes, such as inventory and planning, to partners so they can directly access information on current stock levels. You want to provide partner access through a set of web APIs. These APIs will be published on the public Internet, but only partner applications should be able to use them. Your company and your partners want to minimize the costs of integration, and your developer teams want to focus on the business logic, not secondary concerns such as authorization.
 
-In this lab, you will create an API gateway to securely publish an API and explore many of the features available in API Management.
+## About this lab
+
+In this guided lab, you will create an API gateway to securely publish an API and explore many of the features available in API Management. At the end of the lab there are challenges designed to stretch you. At any point, you can stop the guided part of this lab and start the challenges.
 
 >Note: If you are taking part in this lab as part of a Microsoft UK CSU hosted event, please skip the setup step - we have provisioned everything for you in your own tenant. Log in to the Azure portal and find your resource group, and proceed to Part 1 below.
+
 
 ## Setup
 
@@ -26,7 +30,7 @@ az group create -n APIM-rg -l centralus
 ```
 **Create API Management:**
 
->Note: It can take around 30 minutes for APIM to create and activate the service.  You could use the Consumption sku instead which only takes a few minutes.
+>Note: It can take around 30 minutes for APIM to create and activate the service.  You could use the Consumption sku instead which only takes a few minutes, however you may find that you need at least the Developer sku to explore all of the features in this guide.
 ```
 az apim create --name MyApim<insertrandomnumber> -g APIM-rg -l centralus --sku-name Developer --publisher-email <insert your email> --publisher-name <insert your name or company name>
 ```
@@ -82,24 +86,22 @@ In this lab, we are going to use the **OpenAPI** specification.
 1. Click on **Add API** then **OpenAPI**.
 1. Paste in the second (JSON) URL you saved earlier into the OpenAPI specification field. The rest should autopopulate for you:
 
-<img src="imgs/spec.PNG">
+    <img src="imgs/spec.PNG">
 
-4. Click **Create**
+1. Click **Create**
 
-You will see your newly created API - **NorthwindShoes Products**. 
+    You will see your newly created API - **NorthwindShoes Products**. 
+    You can call API operations directly from the portal which is a convenient, visual way of viewing and testing all operations associated with your APIs.
 
+1. Make sure the API you just created is selected, and then click on the **Test** tab. Select the third **GET** operation. This operation will get the entire product catalogue. Note the **Ocp-Apim-Subscription-Key** is filled in automatically for the primary subscription key associated with this API Management instance. Leave everything on default, and hit **Send**.
 
-You can call API operations directly from the portal which is a convenient, visual way of viewing and testing all operations associated with your APIs.
+    <img src="imgs/test.PNG">
 
-5. Make sure the API you just created is selected, and then click on the **Test** tab. Select the third **GET** operation. This operation will get the entire product catalogue. Note the **Ocp-Apim-Subscription-Key** is filled in automatically for the primary subscription key associated with this API Management instance. Leave everything on default, and hit **Send**.
+1. You should get a HTTP OK response with a status code of 200.  You will also see a JSON array of all product items in the inventory. 
 
-<img src="imgs/test.PNG">
+1. You can explore the trace of this request by clicking on **Trace**.  The request is traced right through from the inbound request to APIM, the backend request to the API, and the outbound request (response) to the caller - in this case APIM. 
 
-6. You should get a HTTP OK response with a status code of 200.  You will also see a JSON array of all product items in the inventory. 
-
-7. You can explore the trace of this request by clicking on **Trace**.  The request is traced right through from the inbound request to APIM, the backend request to the API, and the outbound request (response) to the caller - in this case APIM. 
-
-<img src="imgs/trace.PNG">
+    <img src="imgs/trace.PNG">
  
 
 ## Part 2 - Create a product and publish your API
@@ -114,7 +116,7 @@ When a product is ready for use by developers, it can be published. Once it is p
 1. Leave **Requires subscription** checked and click **Select API**, choosing the NorthWindShoes Products api.
 1. Click **Create**.
 
-<img src="imgs/addproduct.PNG">
+    <img src="imgs/addproduct.PNG">
 
 Now that you have a product, how do you make it visible to developers? 
 
@@ -123,7 +125,7 @@ Now that you have a product, how do you make it visible to developers?
  1. Click on your newly created product and select **Access Control** from the menu. 
  1. Click on **Add Group** and choose **Developers** and **Guests**, then hit **Select**.
 
-<img src="imgs/groups.PNG">
+    <img src="imgs/groups.PNG">
 
 At this is a Basic product, it makes sense to protect the product with some rate limits. You can do this with **Policy**.
 
@@ -144,20 +146,20 @@ Policies can be applied at different **scopes**:
 1. Click on the **Starter** product and then **Policies**.
     You will see an XML document with some statements already in the inbound section (which is applied to incoming requests).
 
-<img src="imgs/policies.PNG">
+    <img src="imgs/policies.PNG">
 
-There are two policies here:
+    There are two policies here:
 
-- The **rate-limit calls** policy specifies that a maximum of 5 API calls may be made in a 60 second period on the **Basic** product (the policy is applied at the product level).
+    - The **rate-limit calls** policy specifies that a maximum of 5 API calls may be made in a 60 second period on the **Basic** product (the policy is applied at the product level).
 
-- The **quota calls** policy specifies that a total of 100 API calls may be made in a 7 day period on the **Basic** product. 
+    - The **quota calls** policy specifies that a total of 100 API calls may be made in a 7 day period on the **Basic** product. 
 
-Note the base tag. Any policies that were defined globally would also be applied, but after the first two policies as it occurs afterwards and therefore is evaluated last.
+    Note the base tag. Any policies that were defined globally would also be applied, but after the first two policies as it occurs afterwards and therefore is evaluated last.
 
-2. Copy and paste both of these policy lines into notepad. 
-3. Go back to your products and click on **Basic** then **Policies**.
-4. Update the XML document to insert the two policies you just copied.
-5. Modify them to have increased limits then **Save**.
+1. Copy and paste both of these policy lines into notepad. 
+1. Go back to your products and click on **Basic** then **Policies**.
+1. Update the XML document to insert the two policies you just copied.
+1. Modify them to have increased limits then **Save**.
 
 ```
     <inbound>
@@ -179,64 +181,63 @@ You can self host your own developer portal, or you can make use of the built in
 
 1. Click on the **Developer Portal** button at the top of the page.  A new tab will open with an adminstrative view of the developer portal.
 
-<img src="imgs/dev.PNG">
+    <img src="imgs/dev.PNG">
 
-You will see default content which has been generated to get you started.  Click around this page and you will see widgets like images and text boxes. 
+    You will see default content which has been generated to get you started.  Click around this page and you will see widgets like images and text boxes. 
 
-The portal is based on an adapted fork of the Paperbits framework. The original Paperbits functionality has been extended to provide API Management-specific widgets (for example, a list of APIs, a list of Products) and a connector to API Management service for saving and retrieving content.
+    The portal is based on an adapted fork of the Paperbits framework. The original Paperbits functionality has been extended to provide API Management-specific widgets (for example, a list of APIs, a list of Products) and a connector to API Management service for saving and retrieving content.
 
-<img src="imgs/site.PNG">
+    <img src="imgs/site.PNG">
 
-Observe the menu on the let hand side.  Here you can do things like:
+    Observe the menu on the let hand side.  Here you can do things like:
 
-- Add a new page 
-- Upload media
-- Change and add new layouts
-- Update navigation items
-- Publish your site
+        - Add a new page 
+    - Upload media
+    - Change and add new layouts
+    - Update navigation items
+    - Publish your site
 
-2. Make some changes to your site - for instance, update the logo, the name and description. 
+1. Make some changes to your site - for instance, update the logo, the name and description. 
 
-3. Publish your site. In the left hand menu, you will see a paper airplane icon. Click on that to publish. Wait for about a minute, then refresh the page. You should see the published version of the site. 
+1. Publish your site. In the left hand menu, you will see a paper airplane icon. Click on that to publish. Wait for about a minute, then refresh the page. You should see the published version of the site. 
 
-4. Click on APIs at the top and then NorthWindShoes Products API. You will see a list of operations available for the API and a **Try It** button.
+1. Click on APIs at the top and then NorthWindShoes Products API. You will see a list of operations available for the API and a **Try It** button.
 
-<img src="imgs/api.PNG">
+    <img src="imgs/api.PNG">
 
-5. Click on the third operation **Retrieve the entire product inventory for the company** then on **Try it**.
+1. Click on the third operation **Retrieve the entire product inventory for the company** then on **Try it**.
 
-You will see an error at the bottom of the page:
+    You will see an error at the bottom of the page:
 
-"Unable to complete the request
-Since the browser initiates the request, it requires Cross-Origin Resource Sharing (CORS) enabled on the server."
+    "Unable to complete the request - Since the browser initiates the request, it requires Cross-Origin Resource Sharing (CORS) enabled on the server."
 
-You can fix this with policy!
+    You can fix this with policy!
 
-6. Go back to the Azure Portal and click on **APIs** then **NorthwindShoes Products**. Ensure **All operations** are selected then click on **Add Policy** in the inbound processing section.
+1. Go back to the Azure Portal and click on **APIs** then **NorthwindShoes Products**. Ensure **All operations** are selected then click on **Add Policy** in the inbound processing section.
 
-<img src="imgs/policy.PNG">
+    <img src="imgs/policy.PNG">
 
-7. Select **Allow cross-origin resource sharing (CORS)**.
+1. Select **Allow cross-origin resource sharing (CORS)**.
 
-8. Fill it in so that it matches the image below.  You will need to click on **Full** to change the allowed headers and exposed headers.
+1. Fill it in so that it matches the image below.  You will need to click on **Full** to change the allowed headers and exposed headers.
 
-<img src="imgs/cors.PNG">
+    <img src="imgs/cors.PNG">
 
-9. Go back to the developer portal and try the operation again.  You will still get an error, but this time it isn't a CORS error - that is fixed. You will see a 401 error, which makes sense. You need a subscription key to make API calls. When you did this in the publisher portal when testing your API, the subscription key was automatically inserted in as a header for you.
+1. Go back to the developer portal and try the operation again.  You will still get an error, but this time it isn't a CORS error - that is fixed. You will see a 401 error, which makes sense. You need a subscription key to make API calls. When you did this in the publisher portal when testing your API, the subscription key was automatically inserted in as a header for you.
 
-10. Go back to the Azure portal and select **Products** then **Basic** and finally **Subscriptions**. Click on the ellipsis to bring up the context menu, and choose **show keys**. Copy the Primary key.
+1. Go back to the Azure portal and select **Products** then **Basic** and finally **Subscriptions**. Click on the ellipsis to bring up the context menu, and choose **show keys**. Copy the Primary key.
 
-<img src="imgs/sub.PNG">
+    <img src="imgs/sub.PNG">
 
-11. Go back to the developer portal, and paste in the primary key into the field for **Authorization: Subscription key** and try the operation again. You should get a 200 OK status code and a payload containing the inventory. 
+1. Go back to the developer portal, and paste in the primary key into the field for **Authorization: Subscription key** and try the operation again. You should get a 200 OK status code and a payload containing the inventory. 
 
-If a developer wanted to try out the API, they would create an account, sign in and subscribe to the product.
+    If a developer wanted to try out the API, they would create an account, sign in and subscribe to the product.
 
-12. Make sure you are signed out of the developer portal. Click **Sign Up** on the homepage and follow that through, including confirming your email address.
+1. Make sure you are signed out of the developer portal. Click **Sign Up** on the homepage and follow that through, including confirming your email address.
 
-13. Sign in to the developer portal using your new account, and then select **Products** from the top menu. 
+1. Sign in to the developer portal using your new account, and then select **Products** from the top menu. 
 
-14. Choose **Basic**, then give your new subscription a name and click the yellow **subscribe** button.  
+1. Choose **Basic**, then give your new subscription a name and click the yellow **subscribe** button.  
 
 A subscription is created for you on the Basic product which comes with a primary and secondary key. 
 
@@ -264,6 +265,52 @@ With **revisions**, you can:
 - Document the changes you make, so your developers can understand what is new.
 - Rollback if you find issues.
 
+1. Navigate to the NorthWindShoes Products API and select the **Revisions** tab. Click **Add revision** and give it a description then click **Create**.
+
+    <img src="imgs/rev.PNG">
+
+    Note that revision 2 is online, but not yet current:
+
+    <img src="imgs/rev2.PNG">
+
+1. Click on **Add Operation** and create a new POST operation. Click **Save**.
+
+    <img src="imgs/post.PNG">
+
+1. Click on **Revision 2** at the top of the blade and switch to revision 1. 
+
+    <img src="imgs/rev4.PNG">
+
+    You will notice that the new POST operation is not listed for revision 1. 
+
+    As it is a non-breaking change, we can go ahead and simply make revision 2 the current revision.
+
+1. Click on the **Revisions** tab and then the ellipsis for revision 2, and choose **Make current**.  Click on **Post to Public Change log** and write a brief description to let developers know what the change is (in this case, a new POST operation). 
+
+    <img src="imgs/rev5.PNG">
+
+    You can view this change log post in the developer portal by clicking through to the API and selecting the new operation, then on the Changelog link:
+
+    <img src="imgs/devp.PNG">
+
+1. Back in the Publisher portal, click on the ellipsis for NorthWindShoes Products API and select **Add version**
+
+    <img src="imgs/ver.PNG">
+
+1. Give the version a name and choose **Path** for the versioning scheme and **v1** for the identifier. Notice the usage example. Experiment with other versioning schemes to see different usage examples. For instance, the **Query String** versioning scheme would result in an operation call that would look like this: **/[operation]?api-version=v1**
+
+1. Click **Create**.
+
+    <img src="imgs/ver1.PNG">
+
+1. You will now see your API has two versions; the original and v1. 
+
+    <img src="imgs/ver2.PNG">
+
+    Additionally, you can visit the developer portal and observe that you can now choose between the original API and v1.
+
+    <img src="imgs/ver3.PNG">
+
 ## Part 5 - Challenges
 
 So far you have:
@@ -277,27 +324,49 @@ So far you have:
 
 The following challenges are designed to stretch you rather than guide you. From using what you learned so far and by using the APIM documentation, you will be able to complete these. 
 
-### Challenge 1
+### Challenge 1 - Import an API
 
 Import a new API. The specification can be found [here](https://conferenceapi.azurewebsites.net?format=json).  Make sure you add a suffix for this API, and call it **conference**. You will use this for the rest of the challenges.
 
-### Challenge 2
+### Challenge 2 - Implement key throttling
 
-Currently, the API returns specific headers.  Your challenge is ensure that the **"x-powered-by"** and **"x-aspnet-version"** headers are stripped from responses.
+It is common to find that a few users over-use an API to the extent that you incur extra costs or that responsiveness to other uses is reduced. You can use throttling to limit access to API endpoints by putting limits on the number of times an API can be called within a specified period of time.
 
-### Challenge 3
+Key throttling allows you to configure different rate limits by any client request value. This type of throttling offers a better way of managing the rate limits as it applies the limit to a specified request key, often the client IP address. It gives every client equal bandwidth for calling the API.
 
-The Conference API currently returns original URLs in its response (see image below).  Your challenge is to make sure that the backend URL in these reponses is replaced with the APIM gateway host address instead.
+**Your challenge is to implement key throttling on the API based on the caller IP address.** 
+
+
+### Challenge 3 - Strip headers
+
+Companies that publish web APIs often need to carefully control the HTTP headers that their APIs return, preferably without rewriting the API source code.
+
+**Your challenge is ensure that the "x-powered-by" and "x-aspnet-version" headers are stripped from the API responses.**
+
+### Challenge 4 - Replace strings
+
+The Conference API currently returns original URLs in its response (see image below).
+
+**Your challenge is to make sure that the backend URL in these reponses is replaced with the APIM gateway host address instead.**
 
 <img src="imgs/original-response2.png">
 
-### Challenge 4
+### Challenge 5 - Caching
 
-You must implement policy to cache responses for the **GetSpeakers** method in order to reduce API latency.  Do this using built in APIM policy and use tracing to validate that it worked.
+Operations in API Management can be configured for response caching. Response caching can significantly reduce API latency, bandwidth consumption, and web service load for data that does not change frequently.
 
-### Challenge 5
+**Your challenge is to implement policy to cache responses for the "GetSpeakers" method in order to reduce API latency.  Do this using built in APIM policy and use tracing to validate that it worked.**
 
-Use an external cache instead of the built-in cache. 
+### Challenge 6 - Caching
+
+Using an external cache allows to overcome a few limitations of the built-in cache. It is especially beneficial if you would like to:
+
+- Avoid having your cache periodically cleared during API Management updates
+- Have more control over your cache configuration
+- Cache more data than your API Management tier allows to
+- Use caching with the Consumption tier of API Management
+
+**Your challenge is to use an external cache instead of the built-in cache.**
 
 
 ## Useful links for the challenges:
