@@ -243,7 +243,7 @@ A subscription is created for you on the Basic product which comes with a primar
 
 Now, when you go back to the NorthWindShoes product API, you will see that your developer subscription key is filled in for you.
 
-## Part 4 - Add revisions and versions (TBC)
+## Part 4 - Add revisions and versions
 
 APIM has support for versions and revisions, and it is useful to understand when you would use either feature.
 
@@ -355,7 +355,7 @@ The Conference API currently returns original URLs in its response (see image be
 
 Operations in API Management can be configured for response caching. Response caching can significantly reduce API latency, bandwidth consumption, and web service load for data that does not change frequently.
 
-**Your challenge is to implement policy to cache responses for the "GetSpeakers" method in order to reduce API latency.  Do this using built in APIM policy and use tracing to validate that it worked.**
+**Your challenge is to implement policy to cache responses for the "GetSpeakers" method in order to reduce API latency.  Do this using built in APIM policy and use tracing to validate that it worked. Set the cache to store responses for 20 seconds**
 
 ### Challenge 6 - Caching
 
