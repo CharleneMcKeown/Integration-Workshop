@@ -191,7 +191,7 @@ You can self host your own developer portal, or you can make use of the built in
 
     Observe the menu on the let hand side.  Here you can do things like:
 
-        - Add a new page 
+    - Add a new page 
     - Upload media
     - Change and add new layouts
     - Update navigation items
