@@ -11,7 +11,11 @@ Suppose you are the lead developer for an online shoe company. The company is gr
 
 In this guided lab, you will create an API gateway to securely publish an API and explore many of the features available in API Management. At the end of the lab there are challenges designed to stretch you. At any point, you can stop the guided part of this lab and start the challenges.
 
->Note: If you are taking part in this lab as part of a Microsoft UK CSU hosted event, please skip the setup step - we have provisioned everything for you in your own tenant. Log in to the Azure portal and find your resource group, and proceed to Part 1 below.
+>Note: If you are taking part in this lab as part of a Microsoft UK CSU hosted event, please skip the setup step - we have provisioned everything for you in your own tenant. Log in to the Azure portal and find your resource group. Click on the Web API and copy the URL for the Web API into notepad, **adding swagger/v1/swagger.json** to the end of it. It should look like:
+
+https://shoecoapid10567482d.azurewebsites.net/swagger/v1/swagger.json
+
+Proceed to Part 1 below.
 
 
 ## Setup
