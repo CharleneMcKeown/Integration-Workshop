@@ -384,3 +384,4 @@ Using an external cache allows to overcome a few limitations of the built-in cac
 
 [APIM Policy Index](https://docs.microsoft.com/en-us/azure/api-management/api-management-policies)
 
+## This lab was built using [APIM Documentation](https://docs.microsoft.com/en-us/azure/api-management/) and [MS Learn resources](https://docs.microsoft.com/en-gb/learn/paths/architect-api-integration/). 
