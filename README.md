@@ -21,7 +21,7 @@ API Management will be introduced to expose an API and protect it using policy.
 
 [Lab 1 - Service Bus & Event Grid](https://github.com/CharleneMcKeown/Integration-Workshop/blob/master/README.md) |
 [Lab 2 - Logic App Challenges](https://github.com/CharleneMcKeown/Integration-Workshop/tree/master/lab.2) |
-Lab 3 - API Management - coming soon!
+[Lab 3 - API Management](https://github.com/CharleneMcKeown/Integration-Workshop/tree/master/lab.3)
 
 ## Lab 1: Service Bus and Event Grid
 
