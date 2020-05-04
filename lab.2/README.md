@@ -94,3 +94,5 @@ https://docs.microsoft.com/en-gb/connectors/
 
 Create a Storage Account:
 https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
+
+[Lab 3 - API Management](https://github.com/CharleneMcKeown/Integration-Workshop/tree/master/lab.3)
