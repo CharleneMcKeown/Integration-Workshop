@@ -38,6 +38,13 @@ az group create -n APIM-rg -l centralus
 ```
 az apim create --name MyApim<insertrandomnumber> -g APIM-rg -l centralus --sku-name Developer --publisher-email <insert your email> --publisher-name <insert your name or company name>
 ```
+**Create an Azure Redis Cache**
+
+>Note: This is only necessary for the challenges at the end of the lab.
+```
+az redis create -l centralus -n MyRedisCache -g APIM-rg --sku Basic --vm-size c0
+```
+
 **Clone the GitHub repo which contains source code for a .NET Core web API:**
 ```
 git clone https://github.com/CharleneMcKeown/mslearn-publish-manage-apis-with-azure-api-management.git
