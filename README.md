@@ -370,7 +370,7 @@ Hopefully this lab has helped to get you more familiar with event grid and servi
 
 In subsequent labs, we will work with Logic Apps in more depth, as well as introducing API Management.
 
-Don't forget to delete your resources afterwards - if you were following along as part of a hosted workshop, we will delete your resource group and resources following lab completion. 
+Don't forget to delete your resources afterwards!
 
 [Proceed to Lab 2 - Logic App Challenges](https://github.com/CharleneMcKeown/Integration-Workshop/tree/master/lab.2)
 
