@@ -4,7 +4,7 @@ The goal of this lab and subsequent labs, is to get you familiar with Azure Inte
 
 No application is an island - more and more, we are seeing organisations face challenges in connecting their applications, particularly when the integration requires connecting to multiple, independent systems, often in complex ways.
 
-Azure Integration Services is an iPaaS (integration Platform as a Service)solution that can help organisations connect applications, wherever they are. It is comprised of four core services, however they can be used independently of one another, or together as a rich integration platform. These are:
+Azure Integration Services is an iPaaS (integration Platform as a Service) solution that can help organisations connect applications, wherever they are. It is comprised of four core services, however they can be used independently of one another, or together as a rich integration platform. These are:
 
 1. Service Bus
 1. Logic Apps
