@@ -322,8 +322,9 @@ Click on the **Filters** next, then select **Enable subject filtering**. In the 
 
 <img src="imgs/eg7.PNG">
 
+>Note: For the next step, you can upload some dummy files of your own, or you can clone this repo and use the example files provided.
 
-6. Click **Upload** and when prompted, select the folder on your VM desktop called **files**. Select all files within it, and hit open.  You should now be able to click the **upload** button to upload the files to your container. 
+6. Click **Upload** and when prompted, select the folder within this repo called **files**. Select all files within it, and hit open.  You should now be able to click the **upload** button to upload the files to your container. 
 
 <img src="imgs/eg8.PNG">
 
